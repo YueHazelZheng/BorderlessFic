@@ -10,9 +10,9 @@ angular.module('myApp.account', ['ngRoute'])
 }])
  
 .controller('AccountCtrl', ['$scope', 'CommonProp', '$firebase', function($scope,CommonProp, $firebase) {
-	$scope.userid = CommonProp.getUser();
+ 	$scope.username = CommonProp.getUserName();
 
-	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com/Articles");
-	var sync = $firebase(firebaseObj.orderByChild("uid").equalTo($scope.userid));
-	$scope.articles = sync.$asArray();
+ 	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com/Articles");
+ 	var sync = $firebase(firebaseObj);
+ 	$scope.articles = sync.$asArray();
 }]);

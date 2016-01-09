@@ -26,6 +26,26 @@
                 <input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="6">
                 <p class="help-block" ng-show="regForm.password.$error.minlength">Min password length is 6 characters.</p>
             </div>
+
+            <p>YOUR PREFERENCES</p>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="username" name="username" class="form-control" ng-model="user.username">
+            </div>
+            <div class="form-group">
+                <p>Languagues</p>
+                <label ng-repeat="language in languages">
+                    <input type="checkbox" ng-checked="langSelection.indexOf(language.$id) > -1" ng-click="toggleLang(language.$id)">{{language.$id}}
+                </label>
+                <p>Fandoms</p>
+                <label ng-repeat="fandom in fandoms">
+                    <input type="checkbox" ng-checked="fandomSelection.indexOf(fandom.$id) > -1" ng-click="toggleFandom(fandom.$id)">{{fandom.$id}}
+                </label>
+               <!--  <p>Genres</p>
+                <label ng-repeat="genre in genres">
+                    <input type="checkbox" ng-checked="genreSelection.indexOf(genre.$id) > -1" ng-click="toggleGenre(genre.$id)">{{genre.$id}}
+                </label> -->
+            </div>
             <button type="button" ng-click="signUp();" ng-disabled="!user.email || !user.password">Register</button>
         </form>
 

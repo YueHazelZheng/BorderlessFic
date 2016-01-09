@@ -8,25 +8,68 @@ angular.module('myApp.home', ['ngRoute'])
         controller: 'HomeCtrl'
     });
 }])
+
+.filter('filterMultiple',['$filter',function ($filter) {
+return function (items, keyObj) {
+    var filterObj = {
+        data:items,
+        filteredData:[],
+        applyFilter : function(obj,key){
+            var fData = [];
+            if (this.filteredData.length == 0)
+                this.filteredData = this.data;
+            if (obj){
+                var fObj = {};
+                if (!angular.isArray(obj)){
+                    fObj[key] = obj;
+                    fData = fData.concat($filter('filter')(this.filteredData,fObj));
+                } else if (angular.isArray(obj)){
+                    if (obj.length > 0){
+                        for (var i=0;i<obj.length;i++){
+                            if (angular.isDefined(obj[i])){
+                                fObj[key] = obj[i];
+                                fData = fData.concat($filter('filter')(this.filteredData,fObj));    
+                            }
+                        }
+
+                    }
+                }
+                if (fData.length > 0){
+                    this.filteredData = fData;
+                }
+            }
+        }
+    };
+    if (keyObj){
+        angular.forEach(keyObj,function(obj,key){
+            filterObj.applyFilter(obj,key);
+        });
+    }
+    return filterObj.filteredData;
+}
+}])
  
 .controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', function($scope,CommonProp, $firebase) {
- 	$scope.userid = CommonProp.getUser();
- 	var langPref = CommonProp.getLangPref();
- 	var fandomPref = CommonProp.getFandomPref();
- 	var genrePref = CommonProp.getGenrePref();
-
  	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com");
- 	var syncLang = $firebase(firebaseObj.child('Tags/Language'));
+    $scope.userid = CommonProp.getUser();
+ 	$scope.langPref = CommonProp.getLangPref();
+ 	$scope.fandomPref = CommonProp.getFandomPref();
+ 	$scope.genrePref = CommonProp.getGenrePref();
+    var syncLang = $firebase(firebaseObj.child('Tags/Language'));
     var syncFandom = $firebase(firebaseObj.child('Tags/Fandom'));
     var syncGenre = $firebase(firebaseObj.child('Tags/Genre'));
     $scope.languages = syncLang.$asArray();
     $scope.fandoms = syncFandom.$asArray();
     $scope.genres = syncGenre.$asArray();
+
+    var articleSync = $firebase(firebaseObj.child('Articles'));
+    //var allArticles = articleSync.$asArray();
+    $scope.articles = articleSync.$asArray();
+
+    // For new filter options
     $scope.langSelection = [];
     $scope.fandomSelection = [];
     $scope.genreSelection = [];
- 	/*var articleSync = $firebase(firebaseObj.child('Articles'));
- 	$scope.articles = articleSync.$asArray();*/
 
  	// for selecting preferred languages
     $scope.toggleLang = function(lang) {
@@ -61,4 +104,12 @@ angular.module('myApp.home', ['ngRoute'])
         }
     };
 
+    $scope.filter = function() {
+
+    };
+
+     // if no preference is chosen
+    /*if($scope.langPref==[]) 
+        $scope.langPref = $scope.languages;
+*/
 }]);

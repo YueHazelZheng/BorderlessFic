@@ -18,6 +18,8 @@ angular.module('myApp', [
   'myApp.account',
   'myApp.newpost',
   'myApp.home',
+  'myApp.translate',
+  'myApp.translateEditor',
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({

@@ -84,7 +84,7 @@ angular.module('myApp.newpost', ['ngRoute'])
         if($scope.fanficFlg==false) 
             fanFlg = 0;
 
-		fb.$push({ title: title, post: post, uid: uid, username: username, transflag: 0, orig: "", translated: [], fanFlg: fanFlg, fandom: $scope.fandomSelection, genre: $scope.genreSelection, language: $scope.langSelection}).then(function(ref) {
+		fb.$push({ title: title, post: post, uid: uid, username: username, transflag: 0, orig: "", translated: [], comments: [], fanFlg: fanFlg, fandom: $scope.fandomSelection, genre: $scope.genreSelection, language: $scope.langSelection}).then(function(ref) {
             console.log(ref); 
             $location.path('/account');
 		}, function(error) {

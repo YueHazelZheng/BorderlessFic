@@ -50,7 +50,8 @@ return function (items, keyObj) {
 }])
  
 .controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', function($scope,CommonProp, $firebase) {
- 	$scope.userid = CommonProp.getUser();
+ 	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com");
+    $scope.userid = CommonProp.getUser();
  	$scope.langPref = CommonProp.getLangPref();
  	$scope.fandomPref = CommonProp.getFandomPref();
  	$scope.genrePref = CommonProp.getGenrePref();
@@ -60,9 +61,6 @@ return function (items, keyObj) {
     $scope.languages = syncLang.$asArray();
     $scope.fandoms = syncFandom.$asArray();
     $scope.genres = syncGenre.$asArray();
-
- 	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com");
-
 
     var articleSync = $firebase(firebaseObj.child('Articles'));
     //var allArticles = articleSync.$asArray();

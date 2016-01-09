@@ -20,6 +20,7 @@ angular.module('myApp', [
   'myApp.home',
   'myApp.translate',
   'myApp.translateEditor',
+  'myApp.article'
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({

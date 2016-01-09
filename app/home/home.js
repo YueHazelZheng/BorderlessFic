@@ -61,10 +61,6 @@ return function (items, keyObj) {
     $scope.fandoms = syncFandom.$asArray();
     $scope.genres = syncGenre.$asArray();
 
-    // if no preference is chosen
-    /*if($scope.langPref==[]) 
-        $scope.langPref = $scope.languages;*/
-
  	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com");
 
 
@@ -114,5 +110,8 @@ return function (items, keyObj) {
 
     };
 
-
+     // if no preference is chosen
+    /*if($scope.langPref==[]) 
+        $scope.langPref = $scope.languages;
+*/
 }]);

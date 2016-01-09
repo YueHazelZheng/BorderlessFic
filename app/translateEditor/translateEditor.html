@@ -15,6 +15,8 @@
 	<link media="all" type="text/css" href="/app/css/core.css" rel="stylesheet">
 	<link media="all" type="text/css" href="/app/css/skins/blue.css" rel="stylesheet">
 	<link media="all" type="text/css" href="/app/css/custom.css" rel="stylesheet">
+	<script src="/app/ckeditor/ckeditor.js"></script>
+  	<script src="/app/ng-ckeditor/ng-ckeditor-1.0.1.js"></script>
 </head>
 
 <body class="portfolio" ng-controller="TranslateEditorCtrl" itemscope itemtype="http://schema.org/WebPage">
@@ -47,7 +49,7 @@
 			<div class="container">
 				<div class="row">
 
-					<h1 class="entry-title" itemprop="headline">Account</h1>
+					<h1 class="entry-title" itemprop="headline">Translate</h1>
 					<p class="description" itemprop="description">Showcase your work with style</p>
 
 				</div> <!-- .row -->
@@ -72,13 +74,42 @@
 
 				<div id="isotope-content" class="content">
 
-					<div id="origPost">
+					<div id="original">
+						<h4 id="origTitle">{{origPost.title}}</h4>
+						<div id="origContent">{{origPost.post}}</div>
 					</div>
 
-					<div id="transEditor">
-						<ng-ckeditor bind="htmlEditor" skin="moono" remove-buttons="Image" remove-plugins="iframe,flash,smiley" msn-count="Number of typed characters:"></ng-ckeditor>
-						<button ng-click="submit()">Publish</button>
-					</div>
+
+					<form class="form-horizontal"  ng-submit="postTranslation()">
+			            <fieldset>
+			 
+			                <!-- Text input-->
+			                <div class="form-group">
+			                    <label class="col-md-4 control-label" for="txtTitle">Title</label>
+			                    <div class="col-md-4">
+			                        <input id="txtTitle" ng-model="article.title" name="txtTitle" type="text" placeholder="placeholder" class="form-control input-md">
+			 
+			                    </div>
+			                </div>
+			 
+			                <!-- Textarea -->
+			                <div class="form-group">
+			                    <label class="col-md-4 control-label" for="txtPost">Translation</label>
+								<div id="transEditor">
+									<ng-ckeditor bind="htmlEditor" skin="moono" remove-buttons="Image" remove-plugins="iframe,flash,smiley" msn-count="Number of typed characters:"></ng-ckeditor>
+								</div>
+			                </div>
+			 
+			                <!-- Button -->
+			                <div class="form-group">
+			                    <label class="col-md-4 control-label" for="singlebutton"></label>
+			                    <div class="col-md-4">
+			                        <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" />
+			                    </div>
+			                </div>
+			 
+			            </fieldset>
+			        </form>
 
 				</div> <!-- #isotope-content -->
 

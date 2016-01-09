@@ -98,4 +98,8 @@ angular.module('myApp.newpost', ['ngRoute'])
 
     var sync = $firebase(firebaseObj.orderByChild("uid").equalTo(uid));
     $scope.articles = sync.$asArray();
+
+    $scope.translatePost = function(id){
+        CommonProp.setArticle(id);
+    };
 }]);

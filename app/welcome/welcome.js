@@ -58,6 +58,7 @@ angular.module('myApp.welcome', ['ngRoute', 'firebase'])
     var fandomPref = [];
     var genrePref = [];
     var username;
+    var article = '';
     return {
         getUser: function() {
             return user;
@@ -88,6 +89,12 @@ angular.module('myApp.welcome', ['ngRoute', 'firebase'])
         },
         setUserName: function(value) {
             username = value;
+        },
+        getArticle: function() {
+            return article;
+        },
+        setArticle: function(value) {
+            article = value;
         }
     };
 });

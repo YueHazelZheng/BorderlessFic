@@ -16,11 +16,32 @@
 	margin: 16px 0;
 }
 
-.translateEditor .half {
+.translateEditor .half-block {
+	display: inline-block;
+	height: 200px;
+}
+
+.origcontent {
+	overflow: auto;
+	border: 1px solid #e2e2e2;
+	display: inline-block;
+	padding: 12px;
+	height: 600px;
+}
+
+.form-group {
+	margin: 16px 16px 0 0;
+}
+
+
+/*.translateEditor .half {
 	display: inline-block;
 }
 
-.half {
-	width: 40%;
+.translateEditor .editor {
+	float: right;
 }
 
+.translateEditor .content {
+	width: 1000px;
+}*/

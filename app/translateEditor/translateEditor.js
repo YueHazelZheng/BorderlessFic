@@ -34,6 +34,8 @@ angular.module('myApp.translateEditor', ['ngRoute', 'ng.ckeditor'])
 		var article_fb = new Firebase("https://resplendent-heat-9609.firebaseio.com/Articles/");
 		var article_Object = $firebase(article_fb);
         var new_article_id;
+        var selecLang = ['none'];
+        selecLang.push($scope.selectedlanguage);
 
 		var new_fb = article_Object.$push({
             title: title,
@@ -47,7 +49,7 @@ angular.module('myApp.translateEditor', ['ngRoute', 'ng.ckeditor'])
             fanFlg: $scope.origPost.fanFlg,
             fandom: $scope.origPost.fandom,
             genre: $scope.origPost.genre,
-            language: $scope.selectedlanguage})
+            language: selecLang})
         .then(function(ref) {
             console.log("success");
             //console.log(ref);

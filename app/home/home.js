@@ -93,9 +93,9 @@ angular.module('myApp.home', ['ngRoute'])
         return $sce.trustAsHtml(str);
 
     // For new filter options
-    $scope.langSelection = [];
-    $scope.fandomSelection = [];
-    $scope.genreSelection = [];
+    $scope.langSelection = ['none'];
+    $scope.fandomSelection = ['none'];
+    $scope.genreSelection = ['none'];
 
  	// for selecting preferred languages
     $scope.toggleLang = function(lang) {
@@ -106,6 +106,7 @@ angular.module('myApp.home', ['ngRoute'])
         else {
             $scope.langSelection.push(lang);
         }
+        console.log($scope.langSelection);
     };
 
     // for selecting preferred fandoms

@@ -1,0 +1,107 @@
+/* ====================================================
+
+	File Name: Custom CSS (custom.css)
+	Description: Custom CSS
+	Author: Donny Burnside
+	Author URI: http://www.donnyburnside.co.uk
+	Version: 1.0.0
+	License: GNU General Public License v3.0
+	License URI: http://www.gnu.org/licenses/gpl.html
+
+	Canvas - A Free Website Template by Donny Burnside
+	Copyright 2015 Donny Burnside
+	Distributed under the terms of the GNU GPL
+
+	For help and support please visit http://www.donnyburnside.co.uk
+
+   ==================================================== */
+
+/* ====================================================
+	Add your custom CSS below
+   ==================================================== */
+
+ /* ====================================================
+	Sign in
+   ==================================================== */
+* {
+box-sizing: border-box;
+}
+
+*:focus {
+	outline: none;
+}
+body {
+font-family: Arial;
+background-color: #75D6FF;
+padding: 50px;
+}
+.login {
+background-color: #FFF;
+margin: 20px auto;
+width: 300px;
+padding: 20px;
+border-radius: 5px
+}
+.login-screen {
+background-color: #FFF;
+padding: 20px;
+border-radius: 5px
+}
+
+.app-title {
+text-align: center;
+color: #777;
+}
+
+.login-form {
+text-align: center;
+}
+.control-group {
+margin-bottom: 10px;
+}
+
+input {
+text-align: center;
+background-color: #ECF0F1;
+border: 2px solid transparent;
+border-radius: 3px;
+font-size: 16px;
+font-weight: 200;
+padding: 10px 0;
+width: 250px;
+transition: border .5s;
+}
+
+input:focus {
+border: 2px solid #75D6FF;
+box-shadow: none;
+}
+
+.btn {
+  border: 2px solid transparent;
+  background: #75D6FF;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.btn:hover {
+  background-color: #2980B9;
+}
+
+.register-link {
+  font-size: 13px;
+  color: #444;
+  display: block;
+  margin-top: 13px;
+}
+

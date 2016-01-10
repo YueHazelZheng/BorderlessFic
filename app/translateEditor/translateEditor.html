@@ -19,7 +19,7 @@
   	<script src="/app/ng-ckeditor/ng-ckeditor-1.0.1.js"></script>
 </head>
 
-<body class="portfolio" ng-controller="TranslateEditorCtrl" itemscope itemtype="http://schema.org/WebPage">
+<body class="translateEditor" ng-controller="TranslateEditorCtrl" itemscope itemtype="http://schema.org/WebPage">
 
 	<div id="masthead">
 
@@ -28,7 +28,7 @@
 				<div class="row">
 
 					<div id="branding">
-						<a class="logo" href="index.html">Canvas</a>
+						<a class="logo" href="#/home">BorderlessFic</a>
 					</div> <!-- #branding -->
 
 					<nav id="main-menu" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
@@ -74,13 +74,13 @@
 
 				<div id="isotope-content" class="content">
 
-					<div id="original">
+					<div class="half" id="original">
 						<h4 id="origTitle">{{origPost.title}}</h4>
-						<div ng-bind-html="renderHtml(origPost.post)"></div>
+						<div class="entry-content" ng-bind-html="renderHtml(origPost.post)"></div>
 					</div>
 
 
-					<form class="form-horizontal"  ng-submit="postTranslation()">
+					<form class="half form-horizontal"  ng-submit="postTranslation()">
 			            <fieldset>
 			 
 			                <!-- Text input-->

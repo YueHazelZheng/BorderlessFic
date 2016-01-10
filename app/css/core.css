@@ -962,9 +962,11 @@ input[type="cancel"] {
 	margin:1rem 0 0;
 }
 .post.summary .entry-summary p {
-	
+	color: #777;
 }
-
+.post.summary .entry-summary div {
+	margin-bottom: 16px;
+}
 @media (min-width: 768px) {
 
 	.post.summary {
@@ -1027,9 +1029,6 @@ input[type="cancel"] {
 .sidebar > div:last-child {
 	margin-bottom:0;
 }
-
-
-
 
 /* ====================================================
 	08. Prefooter

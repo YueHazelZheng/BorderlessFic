@@ -8,8 +8,9 @@ angular.module('myApp.home', ['ngRoute'])
         controller: 'HomeCtrl'
     });
 }])
- 
-.controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', '$filter', function($scope,CommonProp, $firebase, $filter) {
+
+.controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', '$location', '$sce', function($scope,CommonProp,$firebase,$location,$sce) {
+
  	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com");
     $scope.userid = CommonProp.getUser();
  	$scope.langPref = CommonProp.getLangPref();
@@ -88,6 +89,9 @@ angular.module('myApp.home', ['ngRoute'])
         else return false;
     };
 
+    $scope.renderHtml = function(str) {
+        return $sce.trustAsHtml(str);
+
     // For new filter options
     $scope.langSelection = [];
     $scope.fandomSelection = [];
@@ -126,4 +130,13 @@ angular.module('myApp.home', ['ngRoute'])
         }
     };
 
+    $scope.readMore = function(id) {
+        CommonProp.setArticle(id);
+        $location.path('/article');
+    };
+
+     // if no preference is chosen
+    /*if($scope.langPref==[]) 
+        $scope.langPref = $scope.languages;
+*/
 }]);

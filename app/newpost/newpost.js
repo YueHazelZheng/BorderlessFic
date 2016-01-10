@@ -1,6 +1,6 @@
 'use strict';
  
-angular.module('myApp.newpost', ['ngRoute'])
+angular.module('myApp.newpost', ['ngRoute', 'ng.ckeditor'])
  
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/newpost', {
@@ -9,7 +9,7 @@ angular.module('myApp.newpost', ['ngRoute'])
     });
 }])
  
-.controller('NewPostCtrl', ['$scope','$firebase','CommonProp', '$location', function($scope,$firebase,CommonProp,$location) {
+.controller('NewPostCtrl', ['$scope','$firebase','CommonProp', '$location', '$sce', function($scope,$firebase,CommonProp,$location,$sce) {
 	$scope.content="";
     var uid = CommonProp.getUser();
     var firebaseObject = new Firebase("https://resplendent-heat-9609.firebaseio.com");
@@ -69,23 +69,37 @@ angular.module('myApp.newpost', ['ngRoute'])
     $scope.fileIsLoaded = function(e){
         $scope.$apply(function() {
             $scope.content=e.target.result;
+            $scope.htmlEditor=$scope.content;
         });
     };
 
     $scope.AddPost = function(){
 		var title = $scope.article.title;
-        var post = $scope.content;
+        var post = $scope.htmlEditor;
 		//Language, Genre, Comment ids
 
         var fb = $firebase(firebaseObj);
         var fanFlg = 1;
         var username = CommonProp.getUserName();
 
-        if($scope.fanficFlg==false) 
+        if($scope.fanficFlg==false)
             fanFlg = 0;
 
-		fb.$push({ title: title, post: post, uid: uid, username: username, transflag: 0, orig: "", translated: [], comments: [], fanFlg: fanFlg, fandom: $scope.fandomSelection, genre: $scope.genreSelection, language: $scope.langSelection}).then(function(ref) {
-            console.log(ref); 
+		fb.$push({
+            title: title,
+            post: post,
+            uid: uid,
+            username: username,
+            transflag: 0,
+            orig: "",
+            translated: [],
+            comments: [],
+            fanFlg: fanFlg,
+            fandom: $scope.fandomSelection,
+            genre: $scope.genreSelection,
+            language: $scope.langSelection})
+        .then(function(ref) {
+            console.log(ref);
             $location.path('/account');
 		}, function(error) {
             console.log("Error:", error);
@@ -95,6 +109,10 @@ angular.module('myApp.newpost', ['ngRoute'])
 
     var sync = $firebase(firebaseObj.orderByChild("uid").equalTo(uid));
     $scope.articles = sync.$asArray();
+
+    $scope.renderHtml = function(str) {
+        return $sce.trustAsHtml(str);
+    };
 
     $scope.translatePost = function(id){
         CommonProp.setArticle(id);

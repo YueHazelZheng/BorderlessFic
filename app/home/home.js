@@ -94,6 +94,8 @@ angular.module('myApp.home', ['ngRoute'])
     };
 
     // For new filter options
+    $scope.fanficFlg = false;
+    $scope.originalFlg = false;
     $scope.langSelection = ['none'];
     $scope.fandomSelection = ['none'];
     $scope.genreSelection = ['none'];

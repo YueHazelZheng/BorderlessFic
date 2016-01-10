@@ -95,6 +95,8 @@ angular.module('myApp.register', ['ngRoute', 'firebase'])
                             // set preferences
                             CommonProp.setLangPref($scope.langSelection);
                             CommonProp.setFandomPref($scope.fandomSelection);
+                            CommonProp.setGenrePref(['none']);
+                            CommonProp.setUserName(username);
 
                             $location.path('/account');
                         }, function(error) {

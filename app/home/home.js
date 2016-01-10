@@ -91,6 +91,7 @@ angular.module('myApp.home', ['ngRoute'])
 
     $scope.renderHtml = function(str) {
         return $sce.trustAsHtml(str);
+    };
 
     // For new filter options
     $scope.langSelection = ['none'];

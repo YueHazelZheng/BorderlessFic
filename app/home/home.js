@@ -8,63 +8,85 @@ angular.module('myApp.home', ['ngRoute'])
         controller: 'HomeCtrl'
     });
 }])
-
-.filter('filterMultiple',['$filter',function ($filter) {
-return function (items, keyObj) {
-    var filterObj = {
-        data:items,
-        filteredData:[],
-        applyFilter : function(obj,key){
-            var fData = [];
-            if (this.filteredData.length == 0)
-                this.filteredData = this.data;
-            if (obj){
-                var fObj = {};
-                if (!angular.isArray(obj)){
-                    fObj[key] = obj;
-                    fData = fData.concat($filter('filter')(this.filteredData,fObj));
-                } else if (angular.isArray(obj)){
-                    if (obj.length > 0){
-                        for (var i=0;i<obj.length;i++){
-                            if (angular.isDefined(obj[i])){
-                                fObj[key] = obj[i];
-                                fData = fData.concat($filter('filter')(this.filteredData,fObj));    
-                            }
-                        }
-
-                    }
-                }
-                if (fData.length > 0){
-                    this.filteredData = fData;
-                }
-            }
-        }
-    };
-    if (keyObj){
-        angular.forEach(keyObj,function(obj,key){
-            filterObj.applyFilter(obj,key);
-        });
-    }
-    return filterObj.filteredData;
-}
-}])
  
-.controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', function($scope,CommonProp, $firebase) {
+.controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', '$filter', function($scope,CommonProp, $firebase, $filter) {
  	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com");
     $scope.userid = CommonProp.getUser();
  	$scope.langPref = CommonProp.getLangPref();
  	$scope.fandomPref = CommonProp.getFandomPref();
  	$scope.genrePref = CommonProp.getGenrePref();
+    var fanFlgPref = CommonProp.getFanficFlg();
+    var origFlgPref = CommonProp.getOriginalFlg();
     var syncLang = $firebase(firebaseObj.child('Tags/Language'));
     var syncFandom = $firebase(firebaseObj.child('Tags/Fandom'));
     var syncGenre = $firebase(firebaseObj.child('Tags/Genre'));
     $scope.languages = syncLang.$asArray();
     $scope.fandoms = syncFandom.$asArray();
     $scope.genres = syncGenre.$asArray();
+    var articleSync = '';
 
-    var articleSync = $firebase(firebaseObj.child('Articles'));
-    //var allArticles = articleSync.$asArray();
+    if (fanFlgPref == origFlgPref)
+        articleSync = $firebase(firebaseObj.child('Articles'));
+    else if(fanFlgPref == true)
+        articleSync = $firebase(firebaseObj.child('Articles').orderByChild("fanFlg").equalTo(1));
+    else
+        articleSync = $firebase(firebaseObj.child('Articles').orderByChild("fanFlg").equalTo(0));
     $scope.articles = articleSync.$asArray();
+
+    //var allArticles = articleSync.$asArray();
+    //console.log(allArticles);
+
+    // if all preferences are chosen
+    if($scope.langPref==$scope.languages) 
+        $scope.langPref = [];
+    if($scope.genrePref==$scope.genres)
+        $scope.genrePref = [];
+    if($scope.fandomPref==$scope.fandoms)
+        $scope.fandomPref = [];
+
+    //$scope.articles = $filter('myFilter')(allArticles, $scope.langPref, $scope.genrePref, $scope.fandomPref);
+
+    $scope.filter = function(article) {
+        var langFlg = false;
+        var genreFlg = false;
+        var fandomFlg = false;
+        console.log(article);
+        console.log($scope.langPref);
+        console.log($scope.genrePref);
+        console.log($scope.fandomPref);
+        //if (!((origFlgPref == false && article.fanFlg == false) || (fanFlgPref == false && article.fanFlg == true))) {
+            if ($scope.langPref.length > 1) {
+                for (var i = 0; i < article.language.length; i++) {
+                    console.log(article.language[i]);
+                    console.log($scope.langPref);
+                    if ($scope.langPref.indexOf(article.language[i]) > -1) langFlg = true;
+                }
+            }
+            else langFlg = true;
+            if (langFlg == true) {
+                if ($scope.genrePref.length > 1) {
+                    for (var j = 0; j < article.genre.length; j++) {
+                        console.log(article.genre[j]);
+                        console.log($scope.genrePref);
+                        if ($scope.genrePref.indexOf(article.genre[j]) > -1) genreFlg = true;
+                    }
+                }
+                else genreFlg = true;
+                if (genreFlg == true) {
+                    if (article.fanFlg == true && $scope.fandomPref.length > 1) {
+                        for(var k = 0; k < article.fandom.length; k++) {
+                            console.log(article.fandom[k]);
+                            console.log($scope.fandomPref);
+                            if ($scope.fandomPref.indexOf(article.fandom[k]) > -1) fandomFlg = true;
+                        }
+                    }
+                    else fandomFlg = true;
+                }
+            }
+        //}
+        if (langFlg && genreFlg && fandomFlg) return true;
+        else return false;
+    };
 
     // For new filter options
     $scope.langSelection = [];
@@ -104,12 +126,4 @@ return function (items, keyObj) {
         }
     };
 
-    $scope.filter = function() {
-
-    };
-
-     // if no preference is chosen
-    /*if($scope.langPref==[]) 
-        $scope.langPref = $scope.languages;
-*/
 }]);

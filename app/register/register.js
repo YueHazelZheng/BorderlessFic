@@ -21,8 +21,8 @@ angular.module('myApp.register', ['ngRoute', 'firebase'])
     $scope.languages = syncLang.$asArray();
     $scope.fandoms = syncFandom.$asArray();
     //$scope.genres = syncGenre.$asArray();
-    $scope.langSelection = [];
-    $scope.fandomSelection = [];
+    $scope.langSelection = ['none'];
+    $scope.fandomSelection = ['none'];
     //$scope.genreSelection = [];
 
     // for selecting preferred languages
@@ -86,7 +86,7 @@ angular.module('myApp.register', ['ngRoute', 'firebase'])
                             CommonProp.setUser(uid);
                             // create user database info
                             var userInfo = $firebase(newFirebaseObj.child('Users/'+uid));
-                            userInfo.$set({ username: username, languages: $scope.langSelection, fandoms: $scope.fandomSelection, genres: ''/*$scope.genreSelection*/}).then(function(ref) {
+                            userInfo.$set({ username: username, languages: $scope.langSelection, fandoms: $scope.fandomSelection, genres: ['none']/*$scope.genreSelection*/}).then(function(ref) {
                                 console.log(ref); 
                                 $location.path('/account');
                             }, function(error) {

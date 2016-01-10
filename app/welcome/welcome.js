@@ -59,6 +59,8 @@ angular.module('myApp.welcome', ['ngRoute', 'firebase'])
     var genrePref = [];
     var username;
     var article = '';
+    var fanficFLg = false;
+    var originalFlg = false;
     return {
         getUser: function() {
             return user;
@@ -70,31 +72,43 @@ angular.module('myApp.welcome', ['ngRoute', 'firebase'])
             return langPref;
         },
         setLangPref: function(value) {
-            langPref = value;
+            if (value != 0) langPref = value;
         },
         getFandomPref: function() {
             return fandomPref;
         },
         setFandomPref: function(value) {
-            fandomPref = value;
+            if (value != 0) fandomPref = value;
         },
         getGenrePref: function() {
             return genrePref;
         },
         setGenrePref: function(value) {
-            genrePref = value;
+            if (value != 0) genrePref = value;
         },
         getUserName: function() {
             return username;
         },
         setUserName: function(value) {
-            username = value;
+            if (value != 0) username = value;
         },
         getArticle: function() {
             return article;
         },
         setArticle: function(value) {
-            article = value;
+            if (value != 0) article = value;
+        },
+        getFanficFlg: function() {
+            return fanficFLg;
+        },
+        setFanficFlg: function(value) {
+            fanficFlg = value;
+        },
+        getOriginalFlg: function() {
+            return originalFlg;
+        },
+        setOriginalFlg: function(value) {
+            originalFlg = value;
         }
     };
 });

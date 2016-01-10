@@ -3,25 +3,36 @@
  
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- 
+    <link media="all" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link media="all" type="text/css" href="/app/css/font-awesome.min.css" rel="stylesheet">
+<!--     <link media="all" type="text/css" href="/app/css/core.css" rel="stylesheet">
+    <link media="all" type="text/css" href="/app/css/skins/blue.css" rel="stylesheet"> -->
+    <link media="all" type="text/css" href="/app/css/welcome.css" rel="stylesheet">
     <title>BordlessFic</title>
  
 </head>
  
 <body ng-controller="WelcomeCtrl">
  
-    <div class="container">
-        <div class="jumbotron" style="padding-bottom:0px;">
-            <h2>Welcome to BorderlessFic!</h2>
+    <div class="login">
+        <div class"login-screen">
+            <div class="app-title">
+                <h1>Welcome to Borderless!</h1>
+            </div>
+            <form class="login-form" role="form">
+                <div class="control-group">
+                    <input ng-model="user.email" type="email" class="login-field" placeholder="Email address" id="login-name" required="" autofocus="">
+                    <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
+
+                <div class="control-group">
+                    <input ng-model="user.password" type="password" class="login-field" placeholder="Password" required="" id="login-pass">
+                    <label class="login-field-icon fui-lock" for="login-pass"></label>
+                </div>
+                <button class="btn btn-primary btn-large btn-block" ng-click="SignIn($event)">Sign in</button>
+                <a class="register-link" href="#/register"> Sign Up</a>
+            </form>
         </div>
-        <form class="form-signin" role="form">
-            <input ng-model="user.email" type="email" class="form-control" placeholder="Email address" required="" autofocus="">
-            <input ng-model="user.password" type="password" class="form-control" placeholder="Password" required="">
-            <label class="checkbox">
-                <a href="#/register"> Sign Up</>
-        </label>
-        <button type="button" ng-click="SignIn($event)">Sign in</button>
-      </form>
  
     </div>
  

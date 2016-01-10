@@ -33,7 +33,9 @@ angular.module('myApp.translateEditor', ['ngRoute', 'ng.ckeditor'])
 		//Language, Genre, Comment ids
 		var article_fb = new Firebase("https://resplendent-heat-9609.firebaseio.com/Articles/");
 		var article_Object = $firebase(article_fb);
-		article_Object.$push({
+        var new_article_id;
+
+		var new_fb = article_Object.$push({
             title: title,
             post: post,
             uid: uid,
@@ -47,10 +49,23 @@ angular.module('myApp.translateEditor', ['ngRoute', 'ng.ckeditor'])
             genre: $scope.origPost.genre,
             language: $scope.selectedlanguage})
         .then(function(ref) {
-            console.log(ref);
-            $location.path('/translate');
+            console.log("success");
+            //console.log(ref);
+            article_fb.on('child_added', function(snapshot) {
+                new_article_id = snapshot.key();
+            });
+            var original_article_Object = $firebase(article_fb.child('/'+CommonProp.getArticle()).child('/translated'));
+            original_article_Object.$push(new_article_id)
+            .then(function(ref) {
+                console.log(new_article_id);
+                console.log(original_article_Object.$asObject());
+                $location.path('/translate');
+            }, function(error) {
+                console.log("Error:", error);
+            });
 		}, function(error) {
             console.log("Error:", error);
 		});
+
     };
 }]);

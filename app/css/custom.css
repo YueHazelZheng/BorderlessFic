@@ -1,0 +1,33 @@
+/* ====================================================
+	Comment Area
+   ==================================================== */
+/*   .commentArea {
+   margin: 16px 0;
+   }
+*/
+.commentArea label {
+	margin:16px 0;
+	margin:1rem 0;
+	margin:0;
+	font-family:"Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size:100%;
+	font-weight:700;
+	color:#75D6FF;
+}
+
+.commentArea .form-group {
+	margin:16px 16px 0 0;
+}
+
+/*.transEditor {
+	margin: 16px 16px ;
+}
+*/
+/* ====================================================
+	Additional Buttons
+   ==================================================== */
+   .postOperations {
+   	margin: 16px 0;
+   }
+
+

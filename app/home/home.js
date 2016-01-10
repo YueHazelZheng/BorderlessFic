@@ -51,10 +51,10 @@ angular.module('myApp.home', ['ngRoute'])
         var langFlg = false;
         var genreFlg = false;
         var fandomFlg = false;
-        //console.log(article);
-        //console.log($scope.langPref);
-        //console.log($scope.genrePref);
-        //console.log($scope.fandomPref);
+        console.log(article);
+        console.log($scope.langPref);
+        console.log($scope.genrePref);
+        console.log($scope.fandomPref);
         //if (!((origFlgPref == false && article.fanFlg == false) || (fanFlgPref == false && article.fanFlg == true))) {
             if ($scope.langPref.length > 1) {
                 for (var i = 0; i < article.language.length; i++) {
@@ -94,6 +94,8 @@ angular.module('myApp.home', ['ngRoute'])
     };
 
     // For new filter options
+    $scope.fanficFlg = false;
+    $scope.originalFlg = false;
     $scope.langSelection = ['none'];
     $scope.fandomSelection = ['none'];
     $scope.genreSelection = ['none'];

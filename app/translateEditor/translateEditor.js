@@ -42,8 +42,8 @@ angular.module('myApp.translateEditor', ['ngRoute', 'ng.ckeditor'])
             username: CommonProp.getUserName(),
             transflag: 1,
             orig: CommonProp.getArticle(),
-            translated: [],
-            comments: [],
+            translated: ['none'],
+            comments: ['none'],
             fanFlg: $scope.origPost.fanFlg,
             fandom: $scope.origPost.fandom,
             genre: $scope.origPost.genre,
@@ -54,7 +54,7 @@ angular.module('myApp.translateEditor', ['ngRoute', 'ng.ckeditor'])
             article_fb.on('child_added', function(snapshot) {
                 new_article_id = snapshot.key();
             });
-            var original_article_Object = $firebase(article_fb.child('/'+CommonProp.getArticle()).child('/translated'));
+            var original_article_Object = $firebase(article_fb.child('/'+CommonProp.getArticle()).child('/translated/'));
             original_article_Object.$push(new_article_id)
             .then(function(ref) {
                 console.log(new_article_id);

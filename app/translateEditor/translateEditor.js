@@ -9,27 +9,48 @@ angular.module('myApp.translateEditor', ['ngRoute', 'ng.ckeditor'])
     });
 }])
 
-.controller('TranslateEditorCtrl', ['$scope', 'CommonProp', '$firebase', function($scope,CommonProp,$firebase) {
+.controller('TranslateEditorCtrl', ['$scope', 'CommonProp', '$firebase', '$location', '$sce', function($scope,CommonProp,$firebase,$location,$sce) {
 	var uid = CommonProp.getUser();
 	//$scope.htmlEditor = CommonProp.getTrans();
 	//$scope.origPost = 
 
-	var fb = new Firebase("https://resplendent-heat-9609.firebaseio.com/Articles/" + CommonProp.getArticle());
-	var origPost = $firebase(fb);
+	var orig_fb = new Firebase("https://resplendent-heat-9609.firebaseio.com/Articles/" + CommonProp.getArticle());
+	var origPost = $firebase(orig_fb);
 	$scope.origPost = origPost.$asObject();
 	//alert($scope.origPost.title);
+    
+    var firebaseObject = new Firebase("https://resplendent-heat-9609.firebaseio.com");
+    var syncLang = $firebase(firebaseObject.child('Tags/Language'));
+    $scope.languages = syncLang.$asArray();
 
-    $scope.AddPost = function(){
+    $scope.renderHtml = function(str) {
+        return $sce.trustAsHtml(str);
+    };
+
+    $scope.postTranslation = function(){
 		var title = $scope.article.title;
         var post = $scope.htmlEditor;
 		//Language, Genre, Comment ids
-
-		fb.$push({ title: title, post: post, uid: uid, transflag: 1, orig: CommonProp.getArticle()}).then(function(ref) {
-            console.log(ref); 
+		var article_fb = new Firebase("https://resplendent-heat-9609.firebaseio.com/Articles/");
+		var article_Object = $firebase(article_fb);
+		article_Object.$push({
+            title: title,
+            post: post,
+            uid: uid,
+            username: CommonProp.getUserName(),
+            transflag: 1,
+            orig: CommonProp.getArticle(),
+            translated: [],
+            comments: [],
+            fanFlg: $scope.origPost.fanFlg,
+            fandom: $scope.origPost.fandom,
+            genre: $scope.origPost.genre,
+            language: $scope.selectedlanguage})
+        .then(function(ref) {
+            console.log(ref);
             $location.path('/translate');
 		}, function(error) {
             console.log("Error:", error);
 		});
-
     };
 }]);

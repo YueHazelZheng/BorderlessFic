@@ -33,7 +33,7 @@
 
 					<nav id="main-menu" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
 						<ul class="horizontal-navigation">
-							<li class="menu-home" itemprop="url"><a href="index.html" title="Home" itemprop="name">Home</a></li>
+							<li class="menu-home" itemprop="url"><a href="#/home" title="Home" itemprop="name">Home</a></li>
 							<li class="menu-about" itemprop="url"><a href="about.html" title="About" itemprop="name">About</a></li>
 							<li class="menu-portfolio active" itemprop="url"><a href="portfolio.html" title="Portfolio" itemprop="name">Portfolio</a></li>
 							<li class="menu-blog" itemprop="url"><a href="blog.html" title="Blog" itemprop="name">Blog</a></li>
@@ -76,7 +76,7 @@
 
 					<div id="original">
 						<h4 id="origTitle">{{origPost.title}}</h4>
-						<div id="origContent">{{origPost.post}}</div>
+						<div ng-bind-html="renderHtml(origPost.post)"></div>
 					</div>
 
 
@@ -91,7 +91,13 @@
 			 
 			                    </div>
 			                </div>
-			 
+			                <!-- Translation language-->
+			                <div class="form-group">
+			                	<label class="col-md-4 control-label" for="singleSelect"> Language: </label><br>
+							    <select name="singleSelect" ng-model="selectedlanguage">
+							      	<option ng-repeat="language in languages" value="language.$id">{{language.$id}}</option>
+							    </select>
+					        </div>   
 			                <!-- Textarea -->
 			                <div class="form-group">
 			                    <label class="col-md-4 control-label" for="txtPost">Translation</label>

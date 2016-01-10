@@ -49,7 +49,7 @@ angular.module('myApp.home', ['ngRoute'])
     };
 }])
  
-.controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', '$location', function($scope,CommonProp,$firebase,$location) {
+.controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', '$location', '$sce', function($scope,CommonProp,$firebase,$location,$sce) {
  	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com");
     $scope.userid = CommonProp.getUser();
  	$scope.langPref = CommonProp.getLangPref();
@@ -65,6 +65,10 @@ angular.module('myApp.home', ['ngRoute'])
     var articleSync = $firebase(firebaseObj.child('Articles'));
     //var allArticles = articleSync.$asArray();
     $scope.articles = articleSync.$asArray();
+
+    $scope.renderHtml = function(str) {
+        return $sce.trustAsHtml(str);
+    };
 
     // For new filter options
     $scope.langSelection = [];

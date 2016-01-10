@@ -1,25 +1,3 @@
-/* ====================================================
-
-	File Name: Custom CSS (custom.css)
-	Description: Custom CSS
-	Author: Donny Burnside
-	Author URI: http://www.donnyburnside.co.uk
-	Version: 1.0.0
-	License: GNU General Public License v3.0
-	License URI: http://www.gnu.org/licenses/gpl.html
-
-	Canvas - A Free Website Template by Donny Burnside
-	Copyright 2015 Donny Burnside
-	Distributed under the terms of the GNU GPL
-
-	For help and support please visit http://www.donnyburnside.co.uk
-
-   ==================================================== */
-
-/* ====================================================
-	Add your custom CSS below
-   ==================================================== */
-
  /* ====================================================
 	Sign in
    ==================================================== */
@@ -35,13 +13,19 @@ font-family: Arial;
 background-color: #75D6FF;
 padding: 50px;
 }
-.login {
+
+.login, .register {
 background-color: #FFF;
 margin: 20px auto;
 width: 300px;
 padding: 20px;
 border-radius: 5px
 }
+
+.register {
+width: 400px;
+}
+
 .login-screen {
 background-color: #FFF;
 padding: 20px;
@@ -53,6 +37,17 @@ text-align: center;
 color: #777;
 }
 
+.preference-title {
+text-align: center;
+color: #777;
+}
+
+.pref-fieldname {
+display: block;
+text-align: center;
+color: #777;
+}
+
 .login-form {
 text-align: center;
 }
@@ -60,7 +55,7 @@ text-align: center;
 margin-bottom: 10px;
 }
 
-input {
+.register-field, .login-field {
 text-align: center;
 background-color: #ECF0F1;
 border: 2px solid transparent;
@@ -70,6 +65,47 @@ font-weight: 200;
 padding: 10px 0;
 width: 250px;
 transition: border .5s;
+}
+
+.checkbox-input {
+/*  text-align: left;
+  display      : block;
+  width: 360px;*/
+}
+
+.checkboxes {
+  margin-bottom:32px;
+  margin-bottom:2rem;
+  padding:12px;
+  padding:0.75rem;
+}
+
+ul {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+ul {
+  padding:12px;
+  padding:0.75rem;
+}
+ul li {
+  margin-bottom:4px;
+  margin-bottom:0.25rem;
+  color: #777;
+}
+ul li:last-child {
+  margin-bottom:0;
+}
+
+/* Remove margin-bottom from the last .widget */
+/*.sidebar > div:last-child {
+  margin-bottom:0;
+}*/
+
+.register-field {
+  width: 360px;
 }
 
 input:focus {
@@ -95,7 +131,7 @@ box-shadow: none;
 }
 
 .btn:hover {
-  background-color: #2980B9;
+  background-color: #69c0e5;
 }
 
 .register-link {

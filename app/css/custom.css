@@ -1,10 +1,3 @@
-/* ====================================================
-	Comment Area
-   ==================================================== */
-/*   .commentArea {
-   margin: 16px 0;
-   }
-*/
 .commentArea label {
 	margin:16px 0;
 	margin:1rem 0;
@@ -19,15 +12,15 @@
 	margin:16px 16px 0 0;
 }
 
-/*.transEditor {
-	margin: 16px 16px ;
+.postOperations {
+	margin: 16px 0;
 }
-*/
-/* ====================================================
-	Additional Buttons
-   ==================================================== */
-   .postOperations {
-   	margin: 16px 0;
-   }
 
+.translateEditor .half {
+	display: inline-block;
+}
+
+.half {
+	width: 40%;
+}
 

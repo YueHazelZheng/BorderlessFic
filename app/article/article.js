@@ -18,4 +18,8 @@ angular.module('myApp.article', ['ngRoute'])
 	$scope.renderHtml = function(str) {
         return $sce.trustAsHtml(str);
     };
+    
+    $scope.postComment = function() {
+        
+    };
 }]);

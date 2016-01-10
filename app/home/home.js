@@ -9,7 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
     });
 }])
 
-.controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', '$location', '$sce', function($scope,CommonProp,$firebase,$location,$sce) {
+.controller('HomeCtrl', ['$scope', 'CommonProp', '$firebase', '$location', '$sce', '$route', function($scope,CommonProp,$firebase,$location,$sce,$route) {
 
  	var firebaseObj = new Firebase("https://resplendent-heat-9609.firebaseio.com");
     $scope.userid = CommonProp.getUser();
@@ -51,34 +51,34 @@ angular.module('myApp.home', ['ngRoute'])
         var langFlg = false;
         var genreFlg = false;
         var fandomFlg = false;
-        console.log(article);
-        console.log($scope.langPref);
-        console.log($scope.genrePref);
-        console.log($scope.fandomPref);
+        //console.log(article);
+        //console.log($scope.langPref);
+        //console.log($scope.genrePref);
+        //console.log($scope.fandomPref);
         //if (!((origFlgPref == false && article.fanFlg == false) || (fanFlgPref == false && article.fanFlg == true))) {
             if ($scope.langPref.length > 1) {
                 for (var i = 0; i < article.language.length; i++) {
-                    console.log(article.language[i]);
-                    console.log($scope.langPref);
-                    if ($scope.langPref.indexOf(article.language[i]) > -1) langFlg = true;
+                    //console.log(article.language[i]);
+                    //console.log($scope.langPref);
+                    if (article.language[i] != 'none' && $scope.langPref.indexOf(article.language[i]) > -1) langFlg = true;
                 }
             }
             else langFlg = true;
             if (langFlg == true) {
                 if ($scope.genrePref.length > 1) {
                     for (var j = 0; j < article.genre.length; j++) {
-                        console.log(article.genre[j]);
-                        console.log($scope.genrePref);
-                        if ($scope.genrePref.indexOf(article.genre[j]) > -1) genreFlg = true;
+                        //console.log(article.genre[j]);
+                        //console.log($scope.genrePref);
+                        if (article.genre[j] != 'none' && $scope.genrePref.indexOf(article.genre[j]) > -1) genreFlg = true;
                     }
                 }
                 else genreFlg = true;
                 if (genreFlg == true) {
                     if (article.fanFlg == true && $scope.fandomPref.length > 1) {
                         for(var k = 0; k < article.fandom.length; k++) {
-                            console.log(article.fandom[k]);
-                            console.log($scope.fandomPref);
-                            if ($scope.fandomPref.indexOf(article.fandom[k]) > -1) fandomFlg = true;
+                            //console.log(article.fandom[k]);
+                            //console.log($scope.fandomPref);
+                            if (article.fandom[k] != 'none' && $scope.fandomPref.indexOf(article.fandom[k]) > -1) fandomFlg = true;
                         }
                     }
                     else fandomFlg = true;
@@ -132,13 +132,21 @@ angular.module('myApp.home', ['ngRoute'])
         }
     };
 
+    $scope.newFilter = function() {
+        CommonProp.setFanficFlg($scope.fanficFlg);
+        CommonProp.setOriginalFlg($scope.originalFlg);
+        CommonProp.setLangPref($scope.langSelection);
+        CommonProp.setGenrePref($scope.genreSelection);
+        CommonProp.setFandomPref($scope.fandomSelection);
+        //console.log($scope.genreSelection);
+        //console.log(CommonProp.getGenrePref());
+        $route.reload();
+        //$scope.$apply();
+    };
+
     $scope.readMore = function(id) {
         CommonProp.setArticle(id);
         $location.path('/article');
     };
 
-     // if no preference is chosen
-    /*if($scope.langPref==[]) 
-        $scope.langPref = $scope.languages;
-*/
 }]);

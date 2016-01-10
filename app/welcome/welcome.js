@@ -59,7 +59,7 @@ angular.module('myApp.welcome', ['ngRoute', 'firebase'])
     var genrePref = [];
     var username;
     var article = '';
-    var fanficFLg = false;
+    var fanficFlg = false;
     var originalFlg = false;
     return {
         getUser: function() {
@@ -99,7 +99,7 @@ angular.module('myApp.welcome', ['ngRoute', 'firebase'])
             if (value != 0) article = value;
         },
         getFanficFlg: function() {
-            return fanficFLg;
+            return fanficFlg;
         },
         setFanficFlg: function(value) {
             fanficFlg = value;

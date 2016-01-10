@@ -19,9 +19,9 @@ angular.module('myApp.newpost', ['ngRoute', 'ng.ckeditor'])
     $scope.languages = syncLang.$asArray();
     $scope.fandoms = syncFandom.$asArray();
     $scope.genres = syncGenre.$asArray();
-    $scope.langSelection = [];
-    $scope.fandomSelection = [];
-    $scope.genreSelection = [];
+    $scope.langSelection = ['none'];
+    $scope.fandomSelection = ['none'];
+    $scope.genreSelection = ['none'];
 
     // for selecting preferred languages
     $scope.toggleLang = function(lang) {
@@ -79,11 +79,11 @@ angular.module('myApp.newpost', ['ngRoute', 'ng.ckeditor'])
 		//Language, Genre, Comment ids
 
         var fb = $firebase(firebaseObj);
-        var fanFlg = 1;
         var username = CommonProp.getUserName();
-
-        if($scope.fanficFlg==false)
-            fanFlg = 0;
+        var fanFlg;
+        if($scope.fanficFlg==true)
+            fanFlg = 1;
+        else fanFlg = 0;
 
 		fb.$push({
             title: title,
@@ -92,8 +92,8 @@ angular.module('myApp.newpost', ['ngRoute', 'ng.ckeditor'])
             username: username,
             transflag: 0,
             orig: "",
-            translated: [],
-            comments: [],
+            translated: ['none'],
+            comments: ['none'],
             fanFlg: fanFlg,
             fandom: $scope.fandomSelection,
             genre: $scope.genreSelection,
